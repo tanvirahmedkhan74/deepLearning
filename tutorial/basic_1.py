@@ -2,6 +2,7 @@
 
 # Tensors are the DSA for datas similar like arrays and vectors for numpy
 import torch
+import numpy as np
 
 # 1d Tensor
 one_dim_tensor = torch.empty(4)
@@ -55,5 +56,22 @@ y.mul_(x)
 all_row_col_0 = x[:, 0]
 row_0_all_col = x[0, :]
 
+# Precision output
+precise_output = x[1, 1].item()
 
+# Reshaping Tensor
+x = torch.rand(8, 8)
+one_dim_16_ele = x.view(16)
+auto_dim_tensor = x.view(-1, 8)  # Creates a 2x8 tensor
 
+# Numpy and Tensor Conversion
+x = torch.ones(5)
+np_arr = x.numpy()
+
+"""x and np_arr shares same memory location (CPU or GPU), if one changed with inplace, others value will also change"""
+
+y = np.ones(5)
+pt_tensor = torch.from_numpy(y)
+
+# We can move Tensor and NP arrays in CPU and GPU if we have CUDA support
+# requires_grad=True is specified for futhure optimization of the tensor
